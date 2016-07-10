@@ -2,28 +2,48 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\ApiTestCaseBase;
 
-class RegistrationControllerTest extends WebTestCase
+class RegistrationControllerTest extends ApiTestCaseBase
 {
     public function testPostRegsiterNewUser()
     {
     	$data = [
     		'username' => 'matko',
     		'email' => 'matko@gmail.com',
-    		'password' => 'test123'
+    		'plainPassword' => [
+    			'first' => 'test123', 'second' => 'test123'
+    		]
     	];
-        $client = static::createClient();
-        $crawler = $client->request(
+        
+        $this->makePOSTRequest($data);
+
+        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testPostRegsiterNewUserWithInvalidEmail()
+    {
+    	$data = [
+    		'username' => 'matko',
+    		'email' => 'matkasgasgashgamail.com',
+    		'plainPassword' => [
+    			'first' => 'test123', 'second' => 'test123'
+    		]
+    	];
+
+    	$this->makePOSTRequest($data);
+
+        $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
+    }
+
+    private function makePOSTRequest($data)
+    {
+    	$this->client->request(
 		    'POST', '/users/register', array(), array(),
 		    array(
 		        'CONTENT_TYPE' => 'application/json',
-		        'HTTP_X-Requested-With' => 'XMLHttpRequest'
 		    ),
     		json_encode($data)
     	);
-
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        //$this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
     }
 }
