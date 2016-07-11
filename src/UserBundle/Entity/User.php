@@ -40,14 +40,4 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * Je li korisnik admin
-     *
-     * @return boolean
-     */
-    public function isAdmin()
-    {
-        return $this->hasRole(self::ROLE_ADMIN);
-    }
 }

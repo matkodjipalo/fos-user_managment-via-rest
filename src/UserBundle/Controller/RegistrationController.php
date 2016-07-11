@@ -16,13 +16,13 @@ use JMS\Serializer\SerializationContext;
 
 class RegistrationController extends BaseController
 {
-	/**
+    /**
      * @Route("/register", name="user_register")
      * @Method("POST")
      */
-	public function registerAction(Request $request)
-	{
-		/** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
+    public function registerAction(Request $request)
+    {
+        /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
@@ -49,13 +49,17 @@ class RegistrationController extends BaseController
 
             $response = new Response($this->serialize('User created.'), Response::HTTP_CREATED);
         } else {
-             throw $this->throwApiProblemValidationException($form);
+            throw $this->throwApiProblemValidationException($form);
         }
 
         return $this->setBaseHeaders($response);
-	}
+    }
 
-	private function processForm(Request $request, FormInterface $form)
+    /**
+     * @param Request       $request
+     * @param FormInterface $form
+     */
+    private function processForm(Request $request, FormInterface $form)
     {
         $data = json_decode($request->getContent(), true);
         if ($data === null) {
@@ -66,30 +70,7 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * Iz requesta pokušava izvući nehashiranu lozinku korisnika.
-     *
-     * Inače, to je posao forme FOSUserBundle, no ona to ne radi zbog
-     * nekog buga, krivog shvaćanja funkcioniranja forme od strane mene ili nekog trećeg razloga...
-     * 
-     * @param Request $request
-     * @return string|null
-     */
-    public function getPlainPasswordFromRequest(Request $request)
-    {
-        $plainPassword = null;
-
-        $content = $request->getContent();
-        $data = json_decode($content, true);
-
-        if(isset($data['plainPassword'])) {
-            $plainPassword = $data['plainPassword'];
-        }
-
-        return $plainPassword;
-    }
-
-    /**
-     * Serijalizira podatke putem JMS serializera.
+     * Data serializing via JMS serializer.
      *
      * @param mixed $data
      *
@@ -119,7 +100,7 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * Postavlja osnovne HTTP headere.
+     * Set base HTTP headers.
      *
      * @param Response $response
      *
