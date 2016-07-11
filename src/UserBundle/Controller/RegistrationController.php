@@ -56,7 +56,7 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * @param Request       $request
+     * @param Request $request
      * @param FormInterface $form
      */
     private function processForm(Request $request, FormInterface $form)
@@ -86,17 +86,18 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * Vraća response u slučaju greške.
+     * Returns response in case of invalid request.
      *
      * @param FormInterface $form
      *
      * @return ApiProblemException
+     * @todo Make custom response for invalid request
      */
     private function throwApiProblemValidationException(FormInterface $form)
     {
-        $errors = $this->getErrorsFromForm($form);
+        //$errors = $this->getErrorsFromForm($form);
 
-        throw new BadRequestHttpException();
+        throw new BadRequestHttpException($this->serialize($errors));
     }
 
     /**
