@@ -12,7 +12,6 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormInterface;
-use JMS\Serializer\SerializationContext;
 
 class RegistrationController extends BaseController
 {
@@ -69,22 +68,6 @@ class RegistrationController extends BaseController
         }
 
         $form->submit($data);
-    }
-
-    /**
-     * Data serializing via JMS serializer.
-     *
-     * @param mixed $data
-     *
-     * @return string JSON string
-     */
-    public function serialize($data)
-    {
-        $context = new SerializationContext();
-        $context->setSerializeNull(true);
-
-        return $this->get('jms_serializer')
-            ->serialize($data, 'json', $context);
     }
 
     /**

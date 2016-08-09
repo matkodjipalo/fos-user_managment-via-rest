@@ -32,7 +32,8 @@
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "raveren/kint": "^1.0",
         "jms/serializer": "^1.1",
-        "jms/serializer-bundle": "^1.1"
+        "jms/serializer-bundle": "^1.1",
+        "lexik/jwt-authentication-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

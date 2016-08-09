@@ -2,7 +2,6 @@
 
 namespace UserBundle\Controller;
 
-use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,9 +11,10 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\Form\FormInterface;
-use JMS\Serializer\SerializationContext;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use UserBundle\Entity\User;
 
-class LoginController extends BaseController
+class LoginController extends Controller
 {
     use \UserBundle\Helper\ControllerHelper;
 
@@ -44,7 +44,6 @@ class LoginController extends BaseController
 
         $token = $this->getToken($user);
         $response = new Response($this->serialize(['token' => $token]), Response::HTTP_OK);
-        $response = new Response(Response::HTTP_OK);
 
         return $this->setBaseHeaders($response);
     }

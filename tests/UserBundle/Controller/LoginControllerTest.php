@@ -30,9 +30,7 @@ class LoginControllerTest extends ApiTestCaseBase
         );
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        //$this->asserter()->assertResponsePropertyExists(
-        //    $response,
-        //    'token'
-       // );
+        $responseArr = json_decode($this->client->getResponse()->getContent(), true);
+        $this->assertArrayHasKey('token', $responseArr);
     }
 }
