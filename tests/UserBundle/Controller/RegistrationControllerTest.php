@@ -8,13 +8,13 @@ class RegistrationControllerTest extends ApiTestCaseBase
 {
     public function testPostRegsiterNewUser()
     {
-    	$data = [
-    		'username' => 'matko',
-    		'email' => 'matko@gmail.com',
-    		'plainPassword' => [
-    			'first' => 'test123', 'second' => 'test123'
-    		]
-    	];
+        $data = [
+            'username' => 'matko',
+            'email' => 'matko@gmail.com',
+            'plainPassword' => [
+                'first' => 'test123', 'second' => 'test123'
+            ]
+        ];
         
         $this->makePOSTRequest($data);
 
@@ -23,27 +23,28 @@ class RegistrationControllerTest extends ApiTestCaseBase
 
     public function testPostRegsiterNewUserWithInvalidEmail()
     {
-    	$data = [
-    		'username' => 'matko',
-    		'email' => 'matkasgasgashgamail.com',
-    		'plainPassword' => [
-    			'first' => 'test123', 'second' => 'test123'
-    		]
-    	];
+        $data = [
+            'username' => 'matko',
+            'email' => 'matkasgasgashgamail.com',
+            'plainPassword' => [
+                'first' => 'test123', 'second' => 'test123'
+            ]
+        ];
 
-    	$this->makePOSTRequest($data);
+        $this->makePOSTRequest($data);
 
         $this->assertEquals(400, $this->client->getResponse()->getStatusCode());
     }
 
     private function makePOSTRequest($data)
     {
-    	$this->client->request(
-		    'POST', '/users/register', array(), array(),
-		    array(
-		        'CONTENT_TYPE' => 'application/json',
-		    ),
-    		json_encode($data)
-    	);
+        $this->client->request(
+            'POST',
+            '/users/register',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            json_encode($data)
+        );
     }
 }

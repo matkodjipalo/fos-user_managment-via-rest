@@ -16,6 +16,8 @@ use JMS\Serializer\SerializationContext;
 
 class RegistrationController extends BaseController
 {
+    use \UserBundle\Helper\ControllerHelper;
+
     /**
      * @Route("/register", name="user_register")
      * @Method("POST")
@@ -95,24 +97,9 @@ class RegistrationController extends BaseController
      */
     private function throwApiProblemValidationException(FormInterface $form)
     {
-        //$errors = $this->getErrorsFromForm($form);
+        $errors = $this->getErrorsFromForm($form);
 
         throw new BadRequestHttpException($this->serialize($errors));
-    }
-
-    /**
-     * Set base HTTP headers.
-     *
-     * @param Response $response
-     *
-     * @return Response
-     */
-    private function setBaseHeaders(Response $response)
-    {
-        $response->headers->set('Content-Type', 'application/json');
-        $response->headers->set('Access-Control-Allow-Origin', '*');
-
-        return $response;
     }
 
     /**
