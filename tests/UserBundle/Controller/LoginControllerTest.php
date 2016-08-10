@@ -13,10 +13,6 @@ class LoginControllerTest extends ApiTestCaseBase
 
         $user = $this->createUser($userName, $password);
 
-        $authData = [
-                'auth' => [$userName, $password]
-            ];
-
         $this->client->request(
             'POST',
             '/users/login',
