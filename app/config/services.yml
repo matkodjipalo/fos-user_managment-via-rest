@@ -4,6 +4,6 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    token_authenticator:
+        class: UserBundle\Security\TokenAuthenticator
+        arguments: ['@lexik_jwt_authentication.jwt_encoder', '@doctrine.orm.entity_manager']
