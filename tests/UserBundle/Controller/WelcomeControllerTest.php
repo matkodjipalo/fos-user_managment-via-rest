@@ -21,6 +21,7 @@ class WelcomeControllerTest extends ApiTestCaseBase
         );
 
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('Hello user.', json_decode($this->client->getResponse()->getContent(), true));
     }
 
     /**

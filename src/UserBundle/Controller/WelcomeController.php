@@ -6,9 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
@@ -24,7 +22,7 @@ class WelcomeController extends Controller
      */
     public function welcomeAction(Request $request)
     {
-        $response = new Response($this->serialize('Welcome user.'), Response::HTTP_OK);
+        $response = new Response($this->serialize('Hello user.'), Response::HTTP_OK);
 
         return $this->setBaseHeaders($response);
     }
