@@ -86,7 +86,7 @@ class RegistrationController extends BaseController
     }
 
     /**
-     * Vraća greške iz forme.
+     * Returns form errors.
      *
      * @param FormInterface $form
      *
