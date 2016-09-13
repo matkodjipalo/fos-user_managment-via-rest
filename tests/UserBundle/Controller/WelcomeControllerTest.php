@@ -24,10 +24,25 @@ class WelcomeControllerTest extends ApiTestCaseBase
         $this->assertEquals('Hello user.', json_decode($this->client->getResponse()->getContent(), true));
     }
 
+    public function testGETWelocmeMessageAsUnauthorizedUser()
+    {
+        $this->client->request(
+            'GET',
+            '/users/welcome',
+            [],
+            [],
+            ['CONTENT_TYPE' => 'application/json'],
+            []
+        );
+
+        $this->assertEquals(401, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('Token is missing!', $this->client->getResponse()->getContent());
+    }
+
     /**
      * Creates some user and returns his token
      *
-     * @return [string
+     * @return string
      */
     private function getTokenForTestUser()
     {
