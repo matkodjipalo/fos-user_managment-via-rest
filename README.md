@@ -1,4 +1,5 @@
-fos-rest
-========
+A working code for blog series FOSUserBundle in Symofny REST API.
 
-A Symfony project created on June 26, 2016, 6:04 pm.
+Part 1 - http://matkodjipalo.com/index.php/2016/07/11/fosuserbundle-rest-api/
+Part 2 - http://matkodjipalo.com/index.php/2016/08/10/fosuserbundle-symofny-rest-api-ii-user-login/
+Part 3 - http://matkodjipalo.com/index.php/2016/08/18/fosuserbundle-symofny-rest-api-iii-token-authentication/
