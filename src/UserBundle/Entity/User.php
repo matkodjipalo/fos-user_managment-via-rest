@@ -43,13 +43,29 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="UserAddOnEmail", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserAddOnEmail", mappedBy="user", cascade={"persist"})
      */
     private $addOnEmails;
 
     public function __construct()
     {
         $this->addOnEmails = new ArrayCollection();
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return $this
+     */
+    public function addEmail($email)
+    {
+        $addOnEmail = new UserAddOnEmail();
+        $addOnEmail->setEmail($email);
+        $addOnEmail->setUser($this);
+
+        $this->addOnEmails[] = $addOnEmail;
+
+        return $this;
     }
 
     /**
