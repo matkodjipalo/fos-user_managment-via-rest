@@ -34,7 +34,7 @@ class ApiTestCaseBase extends WebTestCase
             ->get($id);
     }
 
-    protected function createUser($userName, $password)
+    protected function createUser($userName, $password, $addOnEmail = null)
     {
         $userManager = $this->getService('fos_user.user_manager');
         $user = $userManager->createUser();
@@ -44,6 +44,11 @@ class ApiTestCaseBase extends WebTestCase
         $user->setEmail('email@email.com');
         $user->setEnabled(true);
         $userManager->updateUser($user);
+
+        if (null !== $addOnEmail) {
+            $user->addEmail($addOnEmail);
+            $userManager->updateUser($user);
+        }
 
         return $user;
     }
