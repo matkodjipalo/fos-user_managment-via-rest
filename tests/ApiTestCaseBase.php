@@ -42,6 +42,7 @@ class ApiTestCaseBase extends WebTestCase
         $user->setPlainPassword($password);
         $user->setUsername($userName);
         $user->setEmail('email@email.com');
+        $user->setEnabled(true);
         $userManager->updateUser($user);
 
         return $user;
