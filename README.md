@@ -6,4 +6,4 @@ Part 2 - http://matkodjipalo.com/index.php/2016/08/10/symfony-rest-api-user-logi
 
 Part 3 - http://matkodjipalo.com/index.php/2016/08/18/symfony-rest-api-token-authentication/
 
-Part 4 - matkodjipalo.com/index.php/2017/05/22/fosuserbundle-login-with-multiple-emails/
+Part 4 - http://matkodjipalo.com/index.php/2017/05/22/fosuserbundle-login-with-multiple-emails/
