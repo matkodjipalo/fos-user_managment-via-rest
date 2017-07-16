@@ -16,15 +16,29 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class TokenAuthenticator extends AbstractGuardAuthenticator
 {
+    /**
+     * @var JWTEncoderInterface
+     */
     private $jwtEncoder;
+
+    /**
+     * @var EntityManager
+     */
     private $em;
 
+    /**
+     * @param JWTEncoderInterface $jwtEncoder
+     * @param EntityManager       $em
+     */
     public function __construct(JWTEncoderInterface $jwtEncoder, EntityManager $em)
     {
         $this->jwtEncoder = $jwtEncoder;
         $this->em = $em;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getCredentials(Request $request)
     {
         $extractor = new AuthorizationHeaderTokenExtractor(
@@ -41,6 +55,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         return $token;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $data = $this->jwtEncoder->decode($credentials);
@@ -56,24 +73,39 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
             ->findOneBy(['username' => $username]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
         return true;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
     }
 
+    /**
+     * @inheritdoc
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
     }
 
+    /**
+     * @inheritdoc
+     */
     public function supportsRememberMe()
     {
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function start(Request $request, AuthenticationException $authException = null)
     {
         return new Response('Token is missing!', Response::HTTP_UNAUTHORIZED);
